@@ -6,6 +6,7 @@ volatile uint8_t *LCD_DATA_PORT, *LCD_data_dir,
 uint8_t LCD_RS_pin, LCD_EN_pin;
 
 
+// HIGH LEVEL FUNCTIONS
 // data port is 8-bit, control port is 2-bit
 // initializes LCD with the selected port in 8-bit mode
 void lcd_init(volatile uint8_t *data_port, volatile uint8_t *control_port, 
@@ -27,6 +28,7 @@ void lcd_setpos(uint8_t row, uint8_t col){
 
 }
 
+// LOW LEVEL FUNCTIONS
 void lcd_command(uint8_t command){
 
 }
