@@ -11,5 +11,6 @@ void loop() {
   // put your main code here, to run repeatedly:
 
   *LCD_DATA_PORT ^= 0xFF;
+  *LCD_CONTROL_PORT ^= ((1 << LCD_EN_pin) | (LCD_RS_pin));
   delay(500);
 }
