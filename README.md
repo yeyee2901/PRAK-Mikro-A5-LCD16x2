@@ -49,3 +49,26 @@ while( DATA_BUS & (1 << BUSY_FLAG_BIT) == 1);
 5. pull EN pin LOW
 6. Clear *data* / *command* di data bus
 
+**FUNCTIONS**
+- lcd_command(uint8_t command) : kirim command ke LCD. Daftar command terdapat pada datasheet.
+```cpp
+lcd_command(0x01); // clear display
+```
+
+- lcd_char(char data) : kirim 1 karakter ke LCD untuk di display.
+```cpp
+char karakter[2] = "A";
+lcd_char(karakter[0]); // kirim element ke-0, karena element ke-1 adalah NULL byte
+```
+
+- lcd_string(char *char_array_pointer) : kirim string ke LCD untuk di display.
+String dapat berupa address dari char array ATAU char pointer yang menunjuk ke suatu string.
+```cpp
+char *str_test = "Test 2";
+char buf[10]; 
+sprintf(buf, "Test %d", 3);
+
+lcd_string("Test");     // output: Test
+lcd_string(str_test);   // output: Test 2
+lcd_string(buf);        // output: Test 3
+```
