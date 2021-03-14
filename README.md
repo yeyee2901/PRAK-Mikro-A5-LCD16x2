@@ -101,3 +101,18 @@ Parameter:
 */
 lcd_init( &PORTA, &PORTB, &DDRA, &DDRB, PB0, PB1 );
 ```
+
+**HOW TO USE THIS PROJECT (THE FAST WAY)**
+1. Download Visual Studio Code
+2. Download the PlatformIO extension (from VSCode extension tab)
+3. Clone this repo / download this repo in .zip & unzip it anywhere you want
+4. Navigate to PlatformIO - Home tab
+5. Select "Open Project"
+6. Navigate the folder containing this repo / unzipped folder, select and open it.
+7. You are now inside this PlatformIO project, to build the project, either:
+    - Click the "tick" symbol at the bottom left part of VS Code
+    - Ctrl + Shift + B , select "PlatformIO: Build"
+9. If you followed the steps correctly, the project should build with no problems
+10. To upload the code to your board, edit the "platformio.ini" file first
+11. Change the "board" ID to the board ID you want to upload to (See https://docs.platformio.org/en/latest/platforms/atmelavr.html for list of board ID)
+12. Change the upload protocol to suit your USB programmer (again, see https://docs.platformio.org/en/latest/platforms/atmelavr.html for more info, I used USBasp)
