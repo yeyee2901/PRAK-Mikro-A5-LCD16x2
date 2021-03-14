@@ -42,27 +42,36 @@ while( DATA_BUS & (1 << BUSY_FLAG_BIT) == 1);
 ```
 
 **PSEUDOCODE**
-1. Set RS pin = 0 (*command mode*)
+1. Set RS = 0 (*command mode*) / RS = 1 (*data mode*)
 2. siapkan *data* / *command* di data bus
 3. pull EN pin HIGH
 4. delay 450ns (lihat datasheet HD44780, bag. *Bus Timing Characteristics*)
 5. pull EN pin LOW
-6. Clear *data* / *command* di data bus
 
 **FUNCTIONS**
-- lcd_command(uint8_t command) : kirim command ke LCD. Daftar command terdapat pada datasheet.
+1. lcd_command() : kirim command ke LCD. Daftar command terdapat pada datasheet.
+
+Parameter:
+- uint8_t command : hex dari command yang ingin dikirim
 ```cpp
 lcd_command(0x01); // clear display
 ```
 
-- lcd_char(char data) : kirim 1 karakter ke LCD untuk di display.
+
+2. lcd_char() : kirim 1 karakter ke LCD untuk di display.
+
+Parameter:
+- char data : karakter yang ingin di display (single character, bila array, pastikan hanya akses 1 element saja)
 ```cpp
 char karakter[2] = "A";
 lcd_char(karakter[0]); // kirim element ke-0, karena element ke-1 adalah NULL byte
 ```
 
-- lcd_string(char *char_array_pointer) : kirim string ke LCD untuk di display.
-String dapat berupa address dari char array ATAU char pointer yang menunjuk ke suatu string.
+
+3. lcd_string() : kirim string ke LCD untuk di display.
+
+Parameter:
+- char *char_array_pointer : address dari char array ATAU char pointer yang menunjuk ke suatu char array
 ```cpp
 char *str_test = "Test 2";
 char buf[10]; 
@@ -71,4 +80,24 @@ sprintf(buf, "Test %d", 3);
 lcd_string("Test");     // output: Test
 lcd_string(str_test);   // output: Test 2
 lcd_string(buf);        // output: Test 3
+```
+
+
+4. lcd_init() : inisialisasi LCD menggunakan PORT yang ingin digunakan pada ATMega.
+
+Parameter:
+- volatile uint8_t *data_port : Address dari PORTx yang ingin digunakan sebagai data bus LCD
+- volatile uint8_t *control_port : Address dari PORTx yang ingin digunakan sebagai control bus LCD (untuk RS & EN pin)
+- volatile uint8_t *data_port_dir : Address dari DDRx yang ingin digunakan sebagai kontrol I/O direction dari data bus LCD
+- volatile uint8_t *control_port_dir : Address dari DDRx yang ingin digunakan sebagai kontrol I/O direction dari control bus
+- uint8_t RS_pin : nomor pin dari control bus yang ingin digunakan sebagai pin RS (integer value, bisa menggunakan pin definition datasheet)
+- uint8_t EN_pin : nomor pin dari control bus yang ingin digunakan sebagai pin EN (integer value, bisa menggunakan pin definition datasheet)
+```cpp
+/* Inisialisasi LCD:
+- PORTA : Data bus (8-bit)
+- PORTB : control bus (2-bit)
+- PB0 : pin RS
+- PB1 : pin EN
+*/
+lcd_init( &PORTA, &PORTB, &DDRA, &DDRB, PB0, PB1 );
 ```
