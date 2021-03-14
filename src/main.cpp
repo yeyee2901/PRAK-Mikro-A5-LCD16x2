@@ -1,16 +1,20 @@
 #include <Arduino.h> 
 #include "driver_LCD16x2.hpp"
+#include <stdio.h>
 
 void setup() {
-  // put your setup code here, to run once:
-  lcd_init(&PORTA, &PORTC, &DDRA, &DDRC, PC0, PC1);
-  *LCD_DATA_PORT = 0xFF;
+
+  lcd_init(&PORTA, &PORTD, &DDRA, &DDRD, PD0, PD1);
+
+  // coba string
+  lcd_setpos(1,2);
+  char buf[10];
+  sprintf(buf, " test %d", 16);
+  char *strings = "Test";
+
+  lcd_string(strings);
+  lcd_string(buf);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
-  *LCD_DATA_PORT ^= 0xFF;
-  *LCD_CONTROL_PORT ^= ((1 << LCD_EN_pin) | (LCD_RS_pin));
-  delay(500);
 }
