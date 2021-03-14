@@ -1,5 +1,4 @@
 #include "driver_LCD16x2.hpp"
-#include <string.h>
 
 // global definitions
 volatile uint8_t *LCD_DATA_PORT, *LCD_data_dir, 
