@@ -108,7 +108,7 @@ lcd_init( &PORTA, &PORTB, &DDRA, &DDRB, PB0, PB1 );
 3. Clone repo ini / download repo dalam bentuk .zip & unzip di tempat yang mudah dicari
 4. Di VSCode: buka PlatformIO - Home tab
 5. Pilih "Open Project"
-6. Cari repo yang sudah di clone / yang sudah di unzip, pilih dan Open.
+6. Cari repo yang sudah di clone / yang sudah di unzip, pilih dan Open folder berisi project-nya.
 7. Sekarang anda sudah berada di environment project-nya, untuk Build project ini, bisa salah satu:
     - Klik simbol "centang" di bagian kiri bawah VSCode
     - Tekan Ctrl + Shift + B , pilih "PlatformIO: Build"
